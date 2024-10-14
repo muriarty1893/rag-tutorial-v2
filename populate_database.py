@@ -7,10 +7,8 @@ from langchain.schema.document import Document
 from get_embedding_function import get_embedding_function
 from langchain.vectorstores.chroma import Chroma
 
-
 CHROMA_PATH = "chroma"
 DATA_PATH = "data"
-
 
 def main():
 
@@ -66,7 +64,6 @@ def add_to_chroma(chunks: list[Document]):
     else:
         print("✅ No new documents to add")
 
-
 def calculate_chunk_ids(chunks):
 
     last_page_id = None
@@ -89,11 +86,9 @@ def calculate_chunk_ids(chunks):
 
     return chunks
 
-
 def clear_database():
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
-
 
 if __name__ == "__main__":
     main()

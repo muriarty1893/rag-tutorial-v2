@@ -4,4 +4,4 @@ backup
 chroma
 __pycache__
 .pytest_cache
-
+test_rag.py
