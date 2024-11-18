@@ -13,7 +13,7 @@ Answer the question based only on the following context:
 
 ---
 
-Answer the question based on the above context: {question}
+Answer the question based on the above context, as if you are the person in the above text give information about: {question}
 """
 
 def main():
