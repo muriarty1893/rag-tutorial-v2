@@ -27,7 +27,7 @@ def main():
     with ui.card():
         ui.label('LLM Query Interface')
         input_box = ui.input(label='Enter your query', placeholder='Type your question here...')
-        loading_label = ui.label('Loading...').style('visibility: hidden; color: red;')  # CSS ile görünmez
+        loading_label = ui.label('Loading, please wait...').style('visibility: hidden; color: black;')  # CSS ile görünmez
         ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query()))
         output_column = ui.column()  # Cevapların biriktiği sütun
 
