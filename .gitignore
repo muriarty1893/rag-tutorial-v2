@@ -6,4 +6,3 @@ __pycache__
 .pytest_cache
 test_rag.py
 interaction_log.log
-interaction_log.log
