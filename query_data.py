@@ -3,6 +3,7 @@ from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaLLM
 from get_embedding_function import get_embedding_function
+from log_utils import log_interaction  # Kayıt fonksiyonunu içe aktar
 
 CHROMA_PATH = "chroma"
 
@@ -21,7 +22,10 @@ def main():
     parser.add_argument("query_text", type=str, help="The query text.")
     args = parser.parse_args()
     query_text = args.query_text
-    query_rag(query_text)
+    response_text = query_rag(query_text)
+    
+    # Kayıt fonksiyonunu çağır
+    log_interaction(query_text, response_text)
 
 def query_rag(query_text: str):
     embedding_function = get_embedding_function()
