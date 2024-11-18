@@ -5,3 +5,4 @@ backup
 __pycache__
 .pytest_cache
 test_rag.py
+interaction_log.log
