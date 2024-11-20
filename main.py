@@ -14,7 +14,7 @@ Answer the question based only on the following context:
 
 ---
 
-Answer the question based on the above context, as if you are the person in the above text give information about: {question}
+Answer the question based on the above context, as if you are the person in the above text give information about (if question includes "aaa" at the end then answer short as possible):  {question}
 """
 
 def main():
