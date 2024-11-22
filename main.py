@@ -3,7 +3,7 @@ from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaLLM
 from get_embedding_function import get_embedding_function
-from log_utils import log_interaction  # Kayıt fonksiyonunu içe aktar
+from log_utils import log_interaction
 
 CHROMA_PATH = "chroma"
 
@@ -41,7 +41,7 @@ def query_rag(query_text: str):
     response_text = model.invoke(prompt)
 
     sources = [doc.metadata.get("id", None) for doc, _score in results]
-    formatted_response = f"\nResponse: {response_text}\nSources: {sources}\n"
+    formatted_response = f"\n---\nResponse: {response_text}\nSources: {sources}\n"
     print(formatted_response)
     return response_text
 

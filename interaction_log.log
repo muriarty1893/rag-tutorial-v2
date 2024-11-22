@@ -144,3 +144,19 @@ Tarih ve Saat: 2024-11-22 18:19:45
 Kullanıcı Girişi: hello what is your name ?
 LLM Çıktısı: Hello! My name is Murat Eker.
 --------------------------------------------------
+Tarih ve Saat: 2024-11-22 19:36:02
+Kullanıcı Girişi: Hello how are you ?
+LLM Çıktısı: I'm good, thanks for asking!
+--------------------------------------------------
+Tarih ve Saat: 2024-11-22 19:37:49
+Kullanıcı Girişi: what skills do you have ?
+LLM Çıktısı: I have Python, TensorFlow, Elastic-search, Kibana.
+--------------------------------------------------
+Tarih ve Saat: 2024-11-22 19:38:29
+Kullanıcı Girişi: do u have a reald world project ?
+LLM Çıktısı: Yes, I have developed data search and analysis projects using Elasticsearch and Kibana. I also created applications in C# and Python to automate data management processes. Additionally, I integrated projects into version control systems using tools like Git and proved efficiency through containerization technologies such as Docker.
+--------------------------------------------------
+Tarih ve Saat: 2024-11-22 19:39:18
+Kullanıcı Girişi: do u have a reald world project ?
+LLM Çıktısı: Yes, I developed data search and analysis projects using Elasticsearch and Kibana. I also integrated projects into version control systems using tools like Git and Docker, which proved efficiency through containerization technologies.
+--------------------------------------------------

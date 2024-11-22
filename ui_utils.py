@@ -3,37 +3,32 @@ from datetime import datetime
 from log_utils import log_interaction
 from main import query_rag
 import asyncio
-import time  # Zaman ölçümü için
+import time
 
 def main():
     async def handle_query():
-        # Zaman ölçümü başlangıcı
+ 
         start_time = time.time()
 
         user_input = input_box.value
-        loading_label.style('visibility: visible;')  # "Loading..." görünür yap
-        ui.update()  # UI'yi güncelle
+        loading_label.style('visibility: visible;')
+        ui.update()
 
-        # LLM'den yanıt almak için asenkron çağrı
         llm_output = await asyncio.to_thread(query_rag, user_input)
         log_interaction(user_input, llm_output)
 
-        # Zaman ölçümü bitişi
         elapsed_time = time.time() - start_time
 
-        # Yeni cevapları sütuna ekle
-        output_column.clear()  # Eski cevapları temizle (isteğe bağlı)
         with output_column:
             ui.label(f"Query: {user_input}").classes("query-label")
             ui.label(f"Output: {llm_output}").classes("output-label")
             ui.label(f"Logged at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}").classes("timestamp-label")
-            ui.label(f"Response Time: {elapsed_time:.2f} seconds").classes("response-time-label")  # Geçen süre
+            ui.label(f"Response Time: {elapsed_time:.2f} seconds").classes("response-time-label")
             ui.separator()
 
-        loading_label.style('visibility: hidden;')  # "Loading..." tekrar gizle
-        ui.update()  # UI'yi tekrar güncelle
+        loading_label.style('visibility: hidden;')
+        ui.update()
 
-    # Sayfa genel stil ayarları
     ui.add_head_html("""
     <style>
         body {
@@ -87,7 +82,6 @@ def main():
     </style>
     """)
 
-    # Merkezi kart
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
         with ui.card().classes('center-card'):
             ui.label('LLM Query Interface').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #333;")
@@ -96,11 +90,10 @@ def main():
             with ui.row():
                 ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query())).style("margin-right: 10px;")
                 ui.button('Clear', on_click=lambda: output_column.clear())
-            output_column = ui.column().style("margin-top: 20px;")  # Cevapların biriktiği sütun
+            output_column = ui.column().style("margin-top: 20px;")
 
-    # NiceGUI sunucusunu başlat
-    ui.run(port=8080)
+    
+    ui.run(port=8080) # nicegui server
 
-# Multiprocessing uyumluluğu için gerekli guard
 if __name__ in {"__main__", "__mp_main__"}:
     main()

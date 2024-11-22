@@ -1,5 +1,5 @@
 from langchain_ollama import OllamaEmbeddings
 
 def get_embedding_function():
-    embeddings = OllamaEmbeddings(model="llama3.2:latest")
+    embeddings = OllamaEmbeddings(model="llama3.2:latest") # llama3.2:latest
     return embeddings

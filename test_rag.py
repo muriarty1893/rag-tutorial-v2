@@ -12,14 +12,14 @@ Actual Response: {actual_response}
 def test_cv_name():
     assert query_and_validate(
         question="What is the name of the person in the CV? (Answer with the full name and nothing else)",
-        expected_response="Murat Eker",  # Buraya CV'deki kişinin adı yazılmalı
+        expected_response="Murat Eker", 
     )
 
 
 def test_cv_education():
     assert query_and_validate(
         question="Which university did the person graduate from? (Answer with the university name only)",
-        expected_response="Adana Alparslan Türkeş Science and Technology University",  # CV'ye göre doğru yanıtı girin
+        expected_response="Adana Alparslan Türkeş Science and Technology University", 
     )
 
 
