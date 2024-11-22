@@ -9,17 +9,17 @@ Actual Response: {actual_response}
 """
 
 
-def test_monopoly_rules():
+def test_cv_name():
     assert query_and_validate(
-        question="How much total money does a player start with in Monopoly? (Answer with the number only)",
-        expected_response="$1500",
+        question="What is the name of the person in the CV? (Answer with the full name and nothing else)",
+        expected_response="Murat Eker",  # Buraya CV'deki kişinin adı yazılmalı
     )
 
 
-def test_ticket_to_ride_rules():
+def test_cv_education():
     assert query_and_validate(
-        question="How many points does the longest continuous train get in Ticket to Ride? (Answer with the number only)",
-        expected_response="10 points",
+        question="Which university did the person graduate from? (Answer with the university name only)",
+        expected_response="Adana Alparslan Türkeş Science and Technology University",  # CV'ye göre doğru yanıtı girin
     )
 
 
@@ -36,14 +36,16 @@ def query_and_validate(question: str, expected_response: str):
     print(prompt)
 
     if "true" in evaluation_results_str_cleaned:
-
         print("\033[92m" + f"Response: {evaluation_results_str_cleaned}" + "\033[0m")
         return True
     elif "false" in evaluation_results_str_cleaned:
-
         print("\033[91m" + f"Response: {evaluation_results_str_cleaned}" + "\033[0m")
         return False
     else:
         raise ValueError(
             f"Invalid evaluation result. Cannot determine if 'true' or 'false'."
         )
+
+if __name__ == "__main__":
+    test_cv_name()
+    test_cv_education()
