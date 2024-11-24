@@ -14,7 +14,7 @@ Answer the question based only on the following context, if the question is not 
 
 ---
 
-Answer the question based on the above context, as if you are the person in the above text give information about (if question includes "aaa" at the end then answer short as possible):  {question}
+Answer the question based on the above context, as if you are the person in the above text give information about (if question includes "aaa" at the start of the sentence, then answer quickly and short as possible):  {question}
 """
 
 def main():
@@ -24,7 +24,6 @@ def main():
     query_text = args.query_text
     response_text = query_rag(query_text)
     
-    # Kayıt fonksiyonunu çağır
     log_interaction(query_text, response_text)
 
 def query_rag(query_text: str):
