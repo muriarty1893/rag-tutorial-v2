@@ -8,7 +8,7 @@ from log_utils import log_interaction
 CHROMA_PATH = "chroma"
 
 PROMPT_TEMPLATE = """
-Answer the question based only on the following context:
+Answer the question based only on the following context, if the question is not about the below context, answer with "pass.":
 
 {context}
 
