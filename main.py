@@ -8,14 +8,22 @@ from log_utils import log_interaction
 CHROMA_PATH = "chroma"
 
 PROMPT_TEMPLATE = """
-Answer the question based only on the following context, if the question is not about the below context, answer with "pass.":
+Below is a conversation history between a user and an assistant. Use the history and the provided context to answer the question. If the question is not related to the context or the history, respond with "pass.":
 
+Conversation History:
+{history}
+
+---
+
+Context:
 {context}
 
 ---
 
-Answer the question based on the above context, as if you are the person in the above text give information about (if question includes "aaa" at the start of the sentence, then answer quickly and short as possible):  {question}
+Answer the question based on the above context and history, as if you are the person in the above text. If the question starts with "aaa", answer as quickly and concisely as possible: {question}
 """
+
+conversation_history = []
 
 def main():
     parser = argparse.ArgumentParser()
@@ -23,25 +31,33 @@ def main():
     args = parser.parse_args()
     query_text = args.query_text
     response_text = query_rag(query_text)
-    
     log_interaction(query_text, response_text)
 
 def query_rag(query_text: str):
+    global conversation_history
+
     embedding_function = get_embedding_function()
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
 
     results = db.similarity_search_with_score(query_text, k=5)
-
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+
+    history_text = "\n".join([f"User: {entry['user']}\nLLM: {entry['llm']}" for entry in conversation_history])
+
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
-    prompt = prompt_template.format(context=context_text, question=query_text)
+    prompt = prompt_template.format(history=history_text, context=context_text, question=query_text)
 
     model = OllamaLLM(model="llama3.2:latest")
     response_text = model.invoke(prompt)
 
+    conversation_history.append({"user": query_text, "llm": response_text})
+    MAX_HISTORY = 5
+    conversation_history = conversation_history[-MAX_HISTORY:]
+
     sources = [doc.metadata.get("id", None) for doc, _score in results]
     formatted_response = f"\n---\nResponse: {response_text}\nSources: {sources}\n"
     print(formatted_response)
+
     return response_text
 
 if __name__ == "__main__":

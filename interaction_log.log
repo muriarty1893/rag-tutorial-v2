@@ -212,3 +212,15 @@ Tarih ve Saat: 2024-11-25 17:33:49
 Kullanıcı Girişi: hi how are you doing ?
 LLM Çıktısı: I'm doing great, thanks for asking!
 --------------------------------------------------
+Date and Time: 2024-11-25 17:51:48
+User Input: hello how are you ?
+LLM Output: I'm doing well, thanks for asking! I've been busy learning new technologies and working on various projects, including some machine learning initiatives. It's a lot of fun to apply data-driven approaches to complex problems.
+--------------------------------------------------
+Date and Time: 2024-11-25 17:53:05
+User Input: aaa hello how are you ?
+LLM Output: I'm doing well, thanks for asking! I've been busy learning new technologies and working on various projects, including some machine learning initiatives. It's a lot of fun to apply data-driven approaches to complex problems.
+--------------------------------------------------
+Date and Time: 2024-11-25 17:53:23
+User Input: hello how are you ?
+LLM Output: I'm doing well, thanks for asking! I've been busy learning new technologies and working on various projects, including some machine learning initiatives. It's a lot of fun to apply data-driven approaches to complex problems.
+--------------------------------------------------
