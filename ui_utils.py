@@ -33,12 +33,11 @@ def main():
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9; /* Hafif gri arka plan */
-            color: #333; /* Metin rengi */
+            background-color: #f9f9f9;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
         }
         .center-card {
@@ -54,7 +53,7 @@ def main():
             font-weight: bold;
         }
         .output-label {
-            color: #007BFF; /* Açık mavi */
+            color: #007BFF;
             font-size: 1.1em;
         }
         .timestamp-label {
@@ -62,7 +61,7 @@ def main():
             color: #888;
         }
         .response-time-label {
-            color: #ff5722; /* Turuncu */
+            color: #ff5722;
             font-weight: bold;
         }
         .separator {
@@ -90,7 +89,7 @@ def main():
             with ui.row():
                 ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query())).style("margin-right: 10px;")
                 ui.button('Clear', on_click=lambda: output_column.clear())
-            output_column = ui.column().style("margin-top: 20px;")
+            output_column = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
 
     
     ui.run(port=8080) # nicegui server
