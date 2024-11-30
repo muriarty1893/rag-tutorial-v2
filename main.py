@@ -20,7 +20,7 @@ Context:
 
 ---
 
-Answer the question based on the above context and history, as if you are the person in the above text. If the question starts with "aaa", answer as quickly and concisely as possible: {question}
+Answer the question based on the above context and history, as if you are the person in the above text: {question}
 """
 
 conversation_history = []
