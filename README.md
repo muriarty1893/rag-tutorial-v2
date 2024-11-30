@@ -1,4 +1,4 @@
-# Project: Conversational AI with Contextual Memory
+# Project: Context-Supported AI Response System with Retrieval-Augmented Generation (RAG)
 
 ## Overview
 This project is a conversational AI application designed to answer user queries using a multilingual large language model (LLM) called **Llama 3.2**. The system leverages a combination of advanced natural language processing (NLP) tools and a vector database to provide contextual, accurate, and efficient responses. The AI can maintain a history of conversations and use this history alongside relevant external documents to generate meaningful answers.
