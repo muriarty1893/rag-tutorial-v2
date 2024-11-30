@@ -1,3 +1,4 @@
+# V 1.1.0
 import argparse
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
