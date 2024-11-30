@@ -84,7 +84,7 @@ This project is a conversational AI application designed to answer user queries 
 
 ---
 
-## Mode Details: Llama 3.2
+## Model Details: Llama 3.2
 The Llama 3.2 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 1B and 3B sizes (text in/text out). The Llama 3.2 instruction-tuned text-only models are optimized for multilingual dialogue use cases, including agentic retrieval and summarization tasks. They outperform many of the available open-source and closed chat models on common industry benchmarks.
 
 ---
