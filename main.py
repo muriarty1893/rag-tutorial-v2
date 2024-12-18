@@ -1,4 +1,4 @@
-# V 1.1.0
+# V 2.0.0
 import argparse
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
@@ -9,7 +9,7 @@ from log_utils import log_interaction
 CHROMA_PATH = "chroma"
 
 PROMPT_TEMPLATE = """
-Below is a conversation history between a user and an assistant. Use the history and the provided context to answer the question. If the question is not related to the context or the history, respond with "pass.":
+Below is a conversation history between a user and an assistant. Use the history and the provided context to answer the question.:
 
 Conversation History:
 {history}
@@ -26,16 +26,18 @@ Answer the question based on the above context and history, as if you are the pe
 
 conversation_history = []
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("query_text", type=str, help="The query text.")
-    args = parser.parse_args()
-    query_text = args.query_text
-    response_text = query_rag(query_text)
-    log_interaction(query_text, response_text)
+def is_cv_related(question: str) -> bool:
+    control_model = OllamaLLM(model="gemma2:2b")
+    prompt = f"Is this question related to a CV or job application? Answer 'Yes' or 'No': {question}"
+    response = control_model.invoke(prompt).strip().lower()
+    return "yes" in response
 
 def query_rag(query_text: str):
     global conversation_history
+
+    if not is_cv_related(query_text):
+        print("\n---\nResponse: This question is not related to CVs or job applications.\n")
+        return "This question is not related to CVs or job applications."
 
     embedding_function = get_embedding_function()
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
@@ -60,6 +62,14 @@ def query_rag(query_text: str):
     print(formatted_response)
 
     return response_text
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("query_text", type=str, help="The query text.")
+    args = parser.parse_args()
+    query_text = args.query_text
+    response_text = query_rag(query_text)
+    log_interaction(query_text, response_text)
 
 if __name__ == "__main__":
     main()
