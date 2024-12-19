@@ -17,11 +17,6 @@ def main():
         log_interaction(user_input, llm_output)
 
         elapsed_time = time.time() - start_time
-        
-        if(user_input == ""):
-            llm_output = "Please enter a query."
-            elapsed_time = 0 # reset time
-            user_input = "empty()"
 
         with output_column:
             ui.label(f"Query: {user_input}").classes("query-label")
@@ -88,8 +83,8 @@ def main():
 
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
         with ui.card().classes('center-card'):
-            ui.label('LLM Query Interface').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
-            input_box = ui.input(label='Enter your query', placeholder='Type your question here...').style("width: 100%; margin-bottom: 20px;")
+            ui.label('Ask the LLM about me !').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
+            input_box = ui.input(label='Type your question here...', placeholder='How many years of experience do you have?').style("width: 100%; margin-bottom: 20px;")
             loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
             with ui.row():
                 ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query())).style("margin-right: 10px;")
