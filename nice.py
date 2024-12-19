@@ -34,12 +34,23 @@ def main():
         "What is your favorite programming language?",
         "Tell me about your projects.",
         "What are your skills?",
-        "Describe your career goals.",]
-    
-    random_number = random.randint(1, 5)
+        "Describe your career goals.",
+        "What was your last project about?",
+        "Which programming frameworks do you use?",
+        "What motivates you to code?",
+        "Have you worked in a team before?",
+        "What is your strongest skill?",
+        "How do you solve complex problems?",
+        "What are your future learning plans?",
+        "Can you describe a challenging project?",
+        "What is your favorite tech tool?",
+        "What do you like most about coding?"
+    ]
 
-    # Sayıya göre placeholder seçiyoruz (indeks 0'dan başlar, o yüzden -1 diyoruz)
+    random_number = random.randint(1, 15)
+
     current_p = placeholders[random_number - 1]
+
 
     # CSS
     ui.add_head_html("""
