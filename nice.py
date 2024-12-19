@@ -4,6 +4,7 @@ from log_utils import log_interaction
 from main import query_rag
 import asyncio
 import time
+import random
 
 def main():
     async def handle_query():
@@ -27,7 +28,19 @@ def main():
 
         loading_label.style('visibility: hidden;')
         ui.update()
+
+    placeholders = [
+        "How many years of experience do you have?",
+        "What is your favorite programming language?",
+        "Tell me about your projects.",
+        "What are your skills?",
+        "Describe your career goals.",]
     
+    random_number = random.randint(1, 5)
+
+    # Sayıya göre placeholder seçiyoruz (indeks 0'dan başlar, o yüzden -1 diyoruz)
+    current_p = placeholders[random_number - 1]
+
     # CSS
     ui.add_head_html("""
     <style>
@@ -84,7 +97,7 @@ def main():
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
         with ui.card().classes('center-card'):
             ui.label('Ask the LLM about me !').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
-            input_box = ui.input(label='Type your question here...', placeholder='How many years of experience do you have?').style("width: 100%; margin-bottom: 20px;")
+            input_box = ui.input(label='Type your question here...', placeholder=current_p).style("width: 100%; margin-bottom: 20px;")
             loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
             with ui.row():
                 ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query())).style("margin-right: 10px;")
