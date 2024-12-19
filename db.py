@@ -11,4 +11,4 @@ def view_chroma_data():
     print(f"Documents: {data['documents']}")
 
 if __name__ == "__main__":
-    view_chroma_data()
+    view_chroma_data() 

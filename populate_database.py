@@ -45,7 +45,7 @@ def add_to_chroma(chunks: list[Document]):
         persist_directory=CHROMA_PATH, embedding_function=get_embedding_function()
     )
 
-    chunks_with_ids = calculate_chunk_ids(chunks)
+    chunks_with_ids = calculate_chunk_ids(chunks) 
 
     existing_items = db.get(include=[])  
     existing_ids = set(existing_items["ids"])
