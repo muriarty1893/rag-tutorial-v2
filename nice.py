@@ -2,8 +2,8 @@ from nicegui import ui
 from datetime import datetime
 from log_utils import log_interaction
 from main import query_rag
-from main import get_experience_sum
-from main import get_project_sum
+from main import get_exp_sum
+from main import get_proj_sum
 import asyncio
 import time
 import random
