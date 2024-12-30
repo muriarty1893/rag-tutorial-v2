@@ -107,8 +107,8 @@ def main():
 
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
         with ui.card().classes('center-card'):
-            ui.label('Ask the LLM about me !').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
-            input_box = ui.input(label='Type your question here...', placeholder=current_p).style("width: 100%; margin-bottom: 20px;")
+            ui.label('My Personal AI Guide!').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
+            input_box = ui.input(label='Type your question here, It will answer it. ', placeholder=current_p).style("width: 100%; margin-bottom: 20px;")
             loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
             with ui.row():
                 ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query())).style("margin-right: 10px;")

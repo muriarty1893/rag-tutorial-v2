@@ -54,7 +54,7 @@ def query_rag(query_text: str):
     response_text = model.invoke(prompt)
 
     conversation_history.append({"user": query_text, "llm": response_text})
-    MAX_HISTORY = 5
+    MAX_HISTORY = 2
     conversation_history = conversation_history[-MAX_HISTORY:]
 
     sources = [doc.metadata.get("id", None) for doc, _score in results]
