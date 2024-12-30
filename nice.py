@@ -2,19 +2,28 @@ from nicegui import ui
 from datetime import datetime
 from log_utils import log_interaction
 from main import query_rag
+from main import get_experience_summary
+from main import get_project_summary
 import asyncio
 import time
 import random
 
 def main():
+    # Genel bir yükleme etiketi fonksiyonu
+    async def show_loading_and_execute(task_function, loading_label):
+        loading_label.style('visibility: visible;')
+        ui.update()
+        result = await asyncio.to_thread(task_function)
+        loading_label.style('visibility: hidden;')
+        ui.update()
+        return result
+
+    # QNA işlemi
     async def handle_query():
         start_time = time.time()
 
         user_input = input_box.value
-        loading_label.style('visibility: visible;')
-        ui.update()
-
-        llm_output = await asyncio.to_thread(query_rag, user_input)
+        llm_output = await show_loading_and_execute(lambda: query_rag(user_input), loading_label)
         log_interaction(user_input, llm_output)
 
         elapsed_time = time.time() - start_time
@@ -25,9 +34,6 @@ def main():
             ui.label(f"Logged at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}").classes("timestamp-label")
             ui.label(f"Response Time: {elapsed_time:.2f} seconds").classes("response-time-label")
             ui.separator()
-
-        loading_label.style('visibility: hidden;')
-        ui.update()
 
     placeholders = [
         "How many years of experience do you have?",
@@ -48,9 +54,7 @@ def main():
     ]
 
     random_number = random.randint(1, 15)
-
     current_p = placeholders[random_number - 1]
-
 
     # CSS
     ui.add_head_html("""
@@ -64,7 +68,7 @@ def main():
             align-items: center;
             margin: 0;
         }
-        .center-card {
+        .center-card, .left-card, .right-card {
             width: 400px;
             max-width: 90%;
             padding: 20px;
@@ -106,8 +110,20 @@ def main():
     """)
 
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
+        # Experience Summary
+        with ui.card().classes('left-card'):
+            ui.label('Summary of My Experiences:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
+            experience_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
+            summary_output1 = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
+            async def fetch_and_display_summary1():
+                summary1 = await show_loading_and_execute(get_experience_summary, experience_loading_label)
+                with summary_output1:
+                    ui.label(summary1).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
+            ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary1()))
+
+        # QNA
         with ui.card().classes('center-card'):
-            ui.label('My Personal AI Guide!').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
+            ui.label('Ask My Personal AI Guide!').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
             input_box = ui.input(label='Type your question here, It will answer it. ', placeholder=current_p).style("width: 100%; margin-bottom: 20px;")
             loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
             with ui.row():
@@ -115,7 +131,18 @@ def main():
                 ui.button('Reset', on_click=lambda: output_column.clear())
             output_column = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
 
-    ui.run(port=8080) # nicegui server <- http://localhost:8080
+        # Project Summary
+        with ui.card().classes('right-card'):
+            ui.label('Summary of My Projects:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
+            project_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
+            summary_output = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
+            async def fetch_and_display_summary():
+                summary = await show_loading_and_execute(get_project_summary, project_loading_label)
+                with summary_output:
+                    ui.label(summary).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
+            ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
+
+    ui.run(port=8080)
 
 if __name__ in {"__main__", "__mp_main__"}:
     main()
