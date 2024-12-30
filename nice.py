@@ -2,8 +2,8 @@ from nicegui import ui
 from datetime import datetime
 from log_utils import log_interaction
 from main import query_rag
-from main import get_experience_summary
-from main import get_project_summary
+from main import get_experience_sum
+from main import get_project_sum
 import asyncio
 import time
 import random
@@ -116,7 +116,7 @@ def main():
             experience_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
             summary_output1 = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
             async def fetch_and_display_summary1():
-                summary1 = await show_loading_and_execute(get_experience_summary, experience_loading_label)
+                summary1 = await show_loading_and_execute(get_experience_sum, experience_loading_label)
                 with summary_output1:
                     ui.label(summary1).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary1()))
@@ -137,7 +137,7 @@ def main():
             project_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
             summary_output = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
             async def fetch_and_display_summary():
-                summary = await show_loading_and_execute(get_project_summary, project_loading_label)
+                summary = await show_loading_and_execute(get_project_sum, project_loading_label)
                 with summary_output:
                     ui.label(summary).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
