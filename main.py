@@ -63,7 +63,7 @@ def query_rag(query_text: str):
     
     return response_text
 
-def get_experience_sum():
+def get_exp_sum():
     global conversation_history
 
     embedding_function = get_embedding_function()
@@ -89,7 +89,7 @@ def get_experience_sum():
     print(f"\n---\nExperience Summary: {response_text}\n")
     return response_text
 
-def get_project_sum():
+def get_proj_sum():
     global conversation_history
 
     embedding_function = get_embedding_function()
