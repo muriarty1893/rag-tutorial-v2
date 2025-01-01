@@ -9,7 +9,6 @@ import time
 import random
 
 def main():
-    # Genel bir yükleme etiketi fonksiyonu
     async def show_loading_and_execute(task_function, loading_label):
         loading_label.style('visibility: visible;')
         ui.update()
@@ -18,7 +17,6 @@ def main():
         ui.update()
         return result
 
-    # QNA işlemi
     async def handle_query():
         start_time = time.time()
 
@@ -61,8 +59,8 @@ def main():
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #FFFBE9; /* Light background color */
-            color: #AD8B73; /* Primary text color */
+            background-color: #FFFBE9;
+            color: #AD8B73;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -73,32 +71,32 @@ def main():
             max-width: 90%;
             padding: 20px;
             border-radius: 15px;
-            background-color: #E3CAA5; /* Card background color */
+            background-color: #E3CAA5; 
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .query-label {
-            color: #000000; /* Primary text color for queries */
+            color: #000000;
             font-weight: bold;
         }
         .output-label {
-            color: #000000; /* Accent color for outputs */
+            color: #000000;
             font-size: 1.1em;
         }
         .timestamp-label {
             font-size: 0.9em;
-            color: #000000; /* Secondary text color */
+            color: #000000;
         }
         .response-time-label {
-            color: #000000; /* Primary color for response time */
+            color: #000000;
             font-weight: bold;
         }
         .separator {
-            border-color: #E3CAA5; /* Soft separator color */
+            border-color: #E3CAA5;
         }
         .loading-label {
             font-size: 1.2em;
             font-weight: bold;
-            color: #000000; /* Accent color for loading text */
+            color: #000000;
             animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
@@ -110,7 +108,7 @@ def main():
     """)
 
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
-        # Experience Summary
+
         with ui.card().classes('left-card'):
             ui.label('Summary of My Experiences:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
             experience_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
@@ -121,7 +119,6 @@ def main():
                     ui.label(summary1).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary1()))
 
-        # QNA
         with ui.card().classes('center-card'):
             ui.label('Ask My Personal AI Guide!').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
             input_box = ui.input(label='Type your question here, It will answer it. ', placeholder=current_p).style("width: 100%; margin-bottom: 20px;")
@@ -131,7 +128,6 @@ def main():
                 ui.button('Reset', on_click=lambda: output_column.clear())
             output_column = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
 
-        # Project Summary
         with ui.card().classes('right-card'):
             ui.label('Summary of My Projects:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
             project_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
