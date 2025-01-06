@@ -11,6 +11,7 @@ import os
 import subprocess
 
 DATA_PATH = "data"
+file_uploaded = False
 
 def run_reset_command():
     command = "python populate_database.py --reset"
@@ -176,10 +177,13 @@ def main():
                 upload_label.set_text("")
 
                 def update_database():
+                    if not file_uploaded:
+                        upload_label.set_text("⚠️ Please upload a file before updating the database!")
+                        return
                     result = run_reset_command()
-                    upload_label.set_text("Veritabanı güncellendi!\n" + result)
+                    upload_label.set_text("Database Updated!\n" + result)
 
-                ui.button("Veritabanını Güncelle", on_click=update_database).style("margin-top: 10px;")
+                ui.button("Update Database", on_click=update_database).style("margin-top: 10px;")
 
     ui.run(port=8080)
 
