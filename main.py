@@ -6,6 +6,7 @@ from langchain_ollama import OllamaLLM
 from get_embedding_function import get_embedding_function
 from log_utils import log_interaction
 
+# V 2.0.0
 
 CHROMA_PATH = "chroma"
     
