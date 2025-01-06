@@ -8,7 +8,7 @@ from log_utils import log_interaction
 
 
 CHROMA_PATH = "chroma"
-
+    
 PROMPT_TEMPLATE = """
 Below is a conversation history between a user and an assistant. Use the history and the provided context to answer the question.:
 
