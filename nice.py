@@ -8,8 +8,20 @@ import asyncio
 import time
 import random
 import os
+import subprocess
 
 DATA_PATH = "data"
+
+def run_reset_command():
+    command = "python populate_database.py --reset"
+    try:
+        result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
+        print("Komut başarıyla çalıştırıldı!")
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        print("Komut çalıştırılırken bir hata oluştu:")
+        print(e.stderr)
+        return e.stderr
 
 def save_uploaded_file(uploaded_file):
     os.makedirs(DATA_PATH, exist_ok=True)
@@ -162,6 +174,12 @@ def main():
                 
                 ui.upload(on_upload=handle_upload, label="Select PDF File", multiple=False).style("margin-bottom: 20px;")
                 upload_label.set_text("")
+
+                def update_database():
+                    result = run_reset_command()
+                    upload_label.set_text("Veritabanı güncellendi!\n" + result)
+
+                ui.button("Veritabanını Güncelle", on_click=update_database).style("margin-top: 10px;")
 
     ui.run(port=8080)
 
