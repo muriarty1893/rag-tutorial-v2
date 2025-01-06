@@ -28,6 +28,15 @@ This project is a conversational AI application designed to answer user queries 
 7. **Logging**:
    - Logs user queries and AI responses for debugging and tracking purposes.
 
+8. **Real-Time Conversation Contextualization**:
+   - Integrates contextual memory and external document retrieval in real-time for more accurate responses.
+
+9. **Adaptive Language Model Tuning**:
+   - Supports custom fine-tuning for more specialized domains to adapt the model to particular use cases.
+
+10. **Interactive User Feedback**:
+    - Users can provide feedback on answers, which helps improve future responses by adjusting memory.
+
 ---
 
 ## Technologies Used
@@ -48,11 +57,15 @@ This project is a conversational AI application designed to answer user queries 
   - Extracts text content from PDF files.
 - **Recursive Character Text Splitter**:
   - Splits large text into manageable chunks for better search and retrieval.
+- **External File Format Support**:
+  - Plans for future support for additional file types such as DOCX, TXT, and HTML.
 
 ### **Web Interface**
 - **NiceGUI**:
   - A Python-based framework for creating modern web interfaces.
   - Implements real-time user interaction with AI.
+- **Real-Time Conversation Handling**:
+  - The web interface is optimized to handle live interactions, offering seamless conversation flow.
 
 ### **Other Utilities**
 - **Argparse**:
@@ -61,6 +74,8 @@ This project is a conversational AI application designed to answer user queries 
   - Tracks user inputs and model outputs in a structured log file.
 - **Datetime and Asyncio**:
   - Used for logging timestamps and managing real-time asynchronous tasks.
+- **User Feedback Mechanism**:
+  - A feedback loop that allows users to rate answers, improving response generation.
 
 ---
 
@@ -81,6 +96,9 @@ This project is a conversational AI application designed to answer user queries 
 
 5. **Logging**:
    - All interactions are logged for later analysis.
+
+6. **Interactive Feedback**:
+   - Users can rate responses or provide feedback, which can influence future model behavior and improve the system’s adaptability.
 
 ---
 
@@ -111,6 +129,9 @@ The Llama 3.2 collection of multilingual large language models (LLMs) is a colle
    - Run `main.py` with a query argument:  
      `python main.py "Your query here"`
 
+4. **User Feedback**:
+   - Provide ratings or comments on responses directly from the web interface.
+
 ---
 
 ## Example Use Cases
@@ -120,6 +141,8 @@ The Llama 3.2 collection of multilingual large language models (LLMs) is a colle
    - Supports queries and responses in multiple languages.
 3. **Agentic Retrieval**:
    - Summarizes large documents and provides concise answers.
+4. **Interactive Feedback Loop**:
+   - Users can help fine-tune future responses by providing feedback.
 
 ---
 
@@ -127,6 +150,7 @@ The Llama 3.2 collection of multilingual large language models (LLMs) is a colle
 - Add support for additional file types (e.g., DOCX, TXT).
 - Enhance multilingual capabilities with more tuned models.
 - Implement user-specific memory across sessions.
+- Refine user feedback mechanism to dynamically improve the system.
 
 ---
 
