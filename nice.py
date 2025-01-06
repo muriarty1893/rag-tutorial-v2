@@ -12,7 +12,8 @@ import subprocess
 
 DATA_PATH = "data"
 file_uploaded = False
-
+# 
+#  ik cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
 def run_reset_command():
     command = "python populate_database.py --reset"
     try:
@@ -170,7 +171,7 @@ def main():
 
         with ui.row().style('justify-content: center; align-items: center;'):
             with ui.card().classes('center-card'):
-                ui.label("Upload PDF File to Data Folder").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
+                ui.label("Upload PDF File for QNA").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
                 upload_label = ui.label().style("color: green; margin-top: 10px;")
                 
                 ui.upload(on_upload=handle_upload, label="Select PDF File", multiple=False).style("margin-bottom: 20px;")
