@@ -11,18 +11,15 @@ import os
 
 DATA_PATH = "data"
 
-
-# PDF dosyasını kaydeden fonksiyon
 def save_uploaded_file(uploaded_file):
-    os.makedirs(DATA_PATH, exist_ok=True)  # Klasör yoksa oluştur
+    os.makedirs(DATA_PATH, exist_ok=True)
     file_path = os.path.join(DATA_PATH, uploaded_file.name)
     with open(file_path, "wb") as f:
         f.write(uploaded_file.content.read())
     return f"{uploaded_file.name} has been added to database!"
 
-# Upload işlemini yöneten fonksiyon
 def handle_upload(event):
-    uploaded_file = event  # Tek bir dosya için UploadEventArguments nesnesi
+    uploaded_file = event
     result = save_uploaded_file(uploaded_file)
     upload_label.set_text(result)
 
@@ -127,6 +124,8 @@ def main():
 
     with ui.row().style('justify-content: center; align-items: center; max-height: 90%;'):
 
+        global upload_label
+
         with ui.card().classes('left-card'):
             ui.label('Summary of My Experiences:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
             experience_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
@@ -156,13 +155,11 @@ def main():
                     ui.label(summary).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
 
-        global upload_label  # Label'ı handle_upload içinde değiştirebilmek için global yapıyoruz
         with ui.row().style('justify-content: center; align-items: center;'):
             with ui.card().classes('center-card'):
                 ui.label("Upload PDF File to Data Folder").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
                 upload_label = ui.label().style("color: green; margin-top: 10px;")
                 
-                # Upload bileşeni
                 ui.upload(on_upload=handle_upload, label="Select PDF File", multiple=False).style("margin-bottom: 20px;")
                 upload_label.set_text("")
 
