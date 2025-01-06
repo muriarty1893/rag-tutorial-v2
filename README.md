@@ -149,8 +149,8 @@ The Llama 3.2 collection of multilingual large language models (LLMs) is a colle
 ## Future Improvements
 - Add support for additional file types (e.g., DOCX, TXT).
 - Enhance multilingual capabilities with more tuned models.
-- Implement user-specific memory across sessions.
-- Refine user feedback mechanism to dynamically improve the system.
+- Bigger LLM for better user experience.
+- Implenemtation on a actual running personal website. 
 
 ---
 
