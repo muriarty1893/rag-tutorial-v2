@@ -7,8 +7,6 @@ def view_chroma_data():
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=get_embedding_function())
     data = db.get()
     print(f"Document IDs: {data['ids']}")
-    print(f"Metadata: {data['metadatas']}")
-    print(f"Documents: {data['documents']}")
 
 if __name__ == "__main__":
     view_chroma_data() 
