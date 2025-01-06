@@ -7,6 +7,24 @@ from main import get_proj_sum
 import asyncio
 import time
 import random
+import os
+
+DATA_PATH = "data"
+
+
+# PDF dosyasını kaydeden fonksiyon
+def save_uploaded_file(uploaded_file):
+    os.makedirs(DATA_PATH, exist_ok=True)  # Klasör yoksa oluştur
+    file_path = os.path.join(DATA_PATH, uploaded_file.name)
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.content.read())
+    return f"{uploaded_file.name} has been added to database!"
+
+# Upload işlemini yöneten fonksiyon
+def handle_upload(event):
+    uploaded_file = event  # Tek bir dosya için UploadEventArguments nesnesi
+    result = save_uploaded_file(uploaded_file)
+    upload_label.set_text(result)
 
 def main():
     async def show_loading_and_execute(task_function, loading_label):
@@ -32,7 +50,7 @@ def main():
             ui.label(f"Logged at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}").classes("timestamp-label")
             ui.label(f"Response Time: {elapsed_time:.2f} seconds").classes("response-time-label")
             ui.separator()
-
+        
     placeholders = [
         "How many years of experience do you have?",
         "What is your favorite programming language?",
@@ -137,6 +155,16 @@ def main():
                 with summary_output:
                     ui.label(summary).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
+
+        global upload_label  # Label'ı handle_upload içinde değiştirebilmek için global yapıyoruz
+        with ui.row().style('justify-content: center; align-items: center;'):
+            with ui.card().classes('center-card'):
+                ui.label("Upload PDF File to Data Folder").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
+                upload_label = ui.label().style("color: green; margin-top: 10px;")
+                
+                # Upload bileşeni
+                ui.upload(on_upload=handle_upload, label="Select PDF File", multiple=False).style("margin-bottom: 20px;")
+                upload_label.set_text("")
 
     ui.run(port=8080)
 
