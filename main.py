@@ -1,4 +1,3 @@
-# V 2.0.0
 import argparse
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate
@@ -6,8 +5,9 @@ from langchain_ollama import OllamaLLM
 from get_embedding_function import get_embedding_function
 from log_utils import log_interaction
 
-CHROMA_PATH = "chroma"
 
+CHROMA_PATH = "chroma"
+    
 PROMPT_TEMPLATE = """
 Below is a conversation history between a user and an assistant. Use the history and the provided context to answer the question.:
 

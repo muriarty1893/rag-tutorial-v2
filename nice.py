@@ -12,7 +12,8 @@ import subprocess
 
 DATA_PATH = "data"
 file_uploaded = False
-
+# 
+#  IK cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
 def run_reset_command():
     command = "python populate_database.py --reset"
     try:
@@ -168,23 +169,7 @@ def main():
                     ui.label(summary).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
 
-        with ui.row().style('justify-content: center; align-items: center;'):
-            with ui.card().classes('center-card'):
-                ui.label("Upload PDF File to Data Folder").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
-                upload_label = ui.label().style("color: green; margin-top: 10px;")
-                
-                ui.upload(on_upload=handle_upload, label="Select PDF File", multiple=False).style("margin-bottom: 20px;")
-                upload_label.set_text("")
-
-                def update_database():
-                    if not file_uploaded:
-                        upload_label.set_text("⚠️ Please upload a file before updating the database!")
-                        return
-                    result = run_reset_command()
-                    upload_label.set_text("Database Updated!\n" + result)
-
-                ui.button("Update Database", on_click=update_database).style("margin-top: 10px;")
-
+       
     ui.run(port=8080)
 
 if __name__ in {"__main__", "__mp_main__"}:
