@@ -12,8 +12,9 @@ import subprocess
 
 DATA_PATH = "data"
 file_uploaded = False
-# 
-#  IK cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
+# kullancı adı şifre 2FA 
+#
+# IK cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
 def run_reset_command():
     command = "python populate_database.py --reset"
     try:
@@ -140,37 +141,24 @@ def main():
 
         global upload_label
 
-        with ui.card().classes('left-card'):
-            ui.label('Summary of My Experiences:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
-            experience_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
-            summary_output1 = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
-            async def fetch_and_display_summary1():
-                summary1 = await show_loading_and_execute(get_exp_sum, experience_loading_label)
-                with summary_output1:
-                    ui.label(summary1).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
-            ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary1()))
+        with ui.row().style('justify-content: center; align-items: center;'):
+            with ui.card().classes('center-card'):
+                ui.label("Upload PDF File for QNA").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
+                upload_label = ui.label().style("color: green; margin-top: 10px;")
+                
+                ui.upload(on_upload=handle_upload, label="Select PDF File", multiple=False).style("margin-bottom: 20px;")
+                upload_label.set_text("")
 
-        with ui.card().classes('center-card'):
-            ui.label('Ask My Personal AI Guide!').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
-            input_box = ui.input(label='Type your question here, It will answer it. ', placeholder=current_p).style("width: 100%; margin-bottom: 20px;")
-            loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
-            with ui.row():
-                ui.button('Submit', on_click=lambda: asyncio.create_task(handle_query())).style("margin-right: 10px;")
-                ui.button('Reset', on_click=lambda: output_column.clear())
-            output_column = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
+                def update_database():
+                    if not file_uploaded:
+                        upload_label.set_text("⚠️ Please upload a file before updating the database!")
+                        return
+                    result = run_reset_command()
+                    upload_label.set_text("Database Updated!\n" + result)
 
-        with ui.card().classes('right-card'):
-            ui.label('Summary of My Projects:').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")
-            project_loading_label = ui.label('Generating output, please wait...').style('visibility: hidden;').classes("loading-label")
-            summary_output = ui.column().style("margin-top: 20px; display: flex; flex-direction: column-reverse;")
-            async def fetch_and_display_summary():
-                summary = await show_loading_and_execute(get_proj_sum, project_loading_label)
-                with summary_output:
-                    ui.label(summary).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
-            ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
+                ui.button("Update Database", on_click=update_database).style("margin-top: 10px;")
 
-       
-    ui.run(port=8080)
+    ui.run(port=8070)
 
 if __name__ in {"__main__", "__mp_main__"}:
     main()
