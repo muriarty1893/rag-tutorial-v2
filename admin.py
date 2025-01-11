@@ -4,9 +4,7 @@ import subprocess
 
 DATA_PATH = "data"
 file_uploaded = False
-# kullancı adı şifre 2FA 
-#
-# IK cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
+
 def run_reset_command():
     command = "python populate_database.py --reset"
     try:
