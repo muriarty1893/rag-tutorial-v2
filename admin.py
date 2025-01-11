@@ -39,35 +39,6 @@ def handle_upload(event):
     upload_label.set_text(result)
 
 def main():
-    async def show_loading_and_execute(task_function, loading_label):
-        loading_label.style('visibility: visible;')
-        ui.update()
-        result = await asyncio.to_thread(task_function)
-        loading_label.style('visibility: hidden;')
-        ui.update()
-        return result
-
-    placeholders = [
-        "How many years of experience do you have?",
-        "What is your favorite programming language?",
-        "Tell me about your projects.",
-        "What are your skills?",
-        "Describe your career goals.",
-        "What was your last project about?",
-        "Which programming frameworks do you use?",
-        "What motivates you to code?",
-        "Have you worked in a team before?",
-        "What is your strongest skill?",
-        "How do you solve complex problems?",
-        "What are your future learning plans?",
-        "Can you describe a challenging project?",
-        "What is your favorite tech tool?",
-        "What do you like most about coding?"
-    ]
-
-    random_number = random.randint(1, 15)
-    current_p = placeholders[random_number - 1]
-
     # CSS
     ui.add_head_html("""
     <style>
