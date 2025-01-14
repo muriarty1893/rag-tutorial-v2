@@ -68,6 +68,7 @@ def rebuild_ui():
             ui.label("Log in to Unlock").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
 
 def main():
+    # CSS
     ui.add_head_html("""
     <style>
         body {
@@ -133,7 +134,7 @@ def main():
             pdf_section = ui.card().classes('center-card')
             rebuild_ui()
 
-    ui.run(port=8070)
+    ui.run(port=8070) # localhost:8070
 
 if __name__ in {"__main__", "__mp_main__"}:
     main()

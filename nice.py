@@ -10,10 +10,6 @@ import random
 
 DATA_PATH = "data"
 file_uploaded = False
- 
-#  IK cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
-#
-#
 
 def main():
     async def show_loading_and_execute(task_function, loading_label):
@@ -149,7 +145,7 @@ def main():
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary()))
 
        
-    ui.run(port=8080)
+    ui.run(port=8080) # localhost:8080
 
 if __name__ in {"__main__", "__mp_main__"}:
     main()
