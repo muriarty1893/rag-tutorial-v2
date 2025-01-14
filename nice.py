@@ -7,35 +7,13 @@ from main import get_proj_sum
 import asyncio
 import time
 import random
-import os
-import subprocess
 
 DATA_PATH = "data"
 file_uploaded = False
-# 
+ 
 #  IK cılar için itedikleri özellikleri yazması için alan hangilerini karşıladığımız ve nasıl karşıladığımızı anlatacak 
-def run_reset_command():
-    command = "python populate_database.py --reset"
-    try:
-        result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
-        print("Komut başarıyla çalıştırıldı!")
-        return result.stdout
-    except subprocess.CalledProcessError as e:
-        print("Komut çalıştırılırken bir hata oluştu:")
-        print(e.stderr)
-        return e.stderr
-
-def save_uploaded_file(uploaded_file):
-    os.makedirs(DATA_PATH, exist_ok=True)
-    file_path = os.path.join(DATA_PATH, uploaded_file.name)
-    with open(file_path, "wb") as f:
-        f.write(uploaded_file.content.read())
-    return f"{uploaded_file.name} has been added to database!"
-
-def handle_upload(event):
-    uploaded_file = event
-    result = save_uploaded_file(uploaded_file)
-    upload_label.set_text(result)
+#
+#
 
 def main():
     async def show_loading_and_execute(task_function, loading_label):
@@ -149,6 +127,7 @@ def main():
                 with summary_output1:
                     ui.label(summary1).style("font-size: 1.2em; color: #000000; margin-bottom: 10px;")
             ui.button('Fetch Summary', on_click=lambda: asyncio.create_task(fetch_and_display_summary1()))
+
 
         with ui.card().classes('center-card'):
             ui.label('Ask My Personal AI Guide!').style("font-size: 1.5em; font-weight: bold; margin-bottom: 20px; color: #000000;")

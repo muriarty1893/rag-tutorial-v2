@@ -10,20 +10,6 @@ from langchain_community.vectorstores import Chroma
 CHROMA_PATH = "chroma"
 DATA_PATH = "data"
 
-def main():
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--reset", action="store_true", help="Reset the database.")
-    args = parser.parse_args()
-    if args.reset:
-        print("✨ Clearing Database")
-        clear_database()
-
-    documents = load_documents()
-    chunks = split_documents(documents)
-    add_to_chroma(chunks)
-
-
 def load_documents():
     document_loader = PyPDFDirectoryLoader(DATA_PATH)
     return document_loader.load()
@@ -89,6 +75,19 @@ def calculate_chunk_ids(chunks):
 def clear_database():
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
+
+def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--reset", action="store_true", help="Reset the database.")
+    args = parser.parse_args()
+    if args.reset:
+        print("✨ Clearing Database")
+        clear_database()
+
+    documents = load_documents()
+    chunks = split_documents(documents)
+    add_to_chroma(chunks)
 
 if __name__ == "__main__":
     main()
