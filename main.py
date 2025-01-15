@@ -18,7 +18,7 @@ Context:
 
 ---
 
-Answer the question based on the above context and history, as if you are the person in the above text: {question}
+Answer the question based on the above context and history, as if you are the person in the above text, make it short: {question}
 """
 
 def is_cv_related(question):

@@ -6,7 +6,7 @@ from file_utils import run_reset_command, handle_upload, save_uploaded_file
 DATA_PATH = "data"
 file_uploaded = False
 is_authenticated = False
-USERS = {"aa": "aa", "user": "userpass"}
+USERS = {"dev": "123456789", "user": "userpass"}
 
 def run_reset_command():
     command = "python populate_database.py --reset"
