@@ -33,7 +33,6 @@ def main():
             ui.label(f"Query: {user_input}").classes("query-label")
             ui.label(f"Output: {llm_output}").classes("output-label")
             ui.label(f"Logged at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}").classes("timestamp-label")
-            ui.label(f"Response Time: {elapsed_time:.2f} seconds").classes("response-time-label")
             ui.separator()
         
     placeholders = [
