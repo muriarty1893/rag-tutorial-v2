@@ -12,10 +12,10 @@ def run_reset_command():
     command = "python populate_database.py --reset"
     try:
         result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
-        print("Komut başarıyla çalıştırıldı!")
+        print("Done!")
         return result.stdout
     except subprocess.CalledProcessError as e:
-        print("Komut çalıştırılırken bir hata oluştu:")
+        print("Error:")
         print(e.stderr)
         return e.stderr
 
@@ -28,7 +28,7 @@ def save_uploaded_file(uploaded_file):
 
 def handle_upload(event):
     if not is_authenticated:
-        upload_label.set_text("⚠️ Lütfen önce giriş yapın!")
+        upload_label.set_text("⚠️ Please log in first!")
         return
     uploaded_file = event
     result = save_uploaded_file(uploaded_file)
@@ -38,11 +38,11 @@ def authenticate(username, password):
     global is_authenticated
     if USERS.get(username) == password:
         is_authenticated = True
-        auth_status_label.set_text("✅ Giriş başarılı!")
+        auth_status_label.set_text("✅ Logged in successfully!")
         rebuild_ui()
     else:
         is_authenticated = False
-        auth_status_label.set_text("⚠️ Hatalı kullanıcı adı veya şifre!")
+        auth_status_label.set_text("⚠️ Wrong username or password!")
 
 def rebuild_ui():
     global pdf_section
@@ -126,11 +126,11 @@ def main():
 
         with ui.row().style('justify-content: center; align-items: center;'):
             with ui.card().classes('center-card'):
-                ui.label("Giriş Yap").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
-                username_input = ui.input(label="Kullanıcı Adı").style("margin-bottom: 10px;")
-                password_input = ui.input(label="Şifre", password=True).style("margin-bottom: 20px;")
+                ui.label("Log In").style("font-size: 1.5em; font-weight: bold; color: #000000; margin-bottom: 20px;")
+                username_input = ui.input(label="User Name").style("margin-bottom: 10px;")
+                password_input = ui.input(label="Password", password=True).style("margin-bottom: 20px;")
                 auth_status_label = ui.label().style("color: red; margin-bottom: 10px;")
-                ui.button("Giriş Yap", on_click=lambda: authenticate(username_input.value, password_input.value)).style("margin-top: 10px;")
+                ui.button("Log In", on_click=lambda: authenticate(username_input.value, password_input.value)).style("margin-top: 10px;")
             pdf_section = ui.card().classes('center-card')
             rebuild_ui()
 
